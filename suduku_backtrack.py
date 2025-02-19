@@ -1,3 +1,4 @@
+import time
 def validation(board,row,col,number):
     # check entire row and col
     for i in range(9):
@@ -45,7 +46,7 @@ def print_board(board):
         print(" ".join(str(num) for num in i ))
         
 def main():
-    filename = "F:\MDU\DVA340\Assignment 1\Assignment 2 sudoku.txt"
+    filename = "F:\MDU\DVA340\Assignment _1\Assignment 2 sudoku.txt"
     with open(filename, 'r') as file:
         line = file.readlines()
         sudoku_board = []
@@ -60,13 +61,17 @@ def main():
                 current_sudoku_board.append([int(j) for j in i])
         if current_sudoku_board:
             sudoku_board.append(current_sudoku_board)
+    total_time = 0
     for idx, sudoku in enumerate(sudoku_board):
         print(f"SUDOKU {idx + 1}:")
+        start_time = time.time()
         if solveSudoku(sudoku):
             print_board(sudoku)
         else:
             print("No solution exists.")
-        print()
-        
+        end_time = time.time()
+        total_time += end_time - start_time
+        print(f"Time taken for {idx+1}th Sudoku solve {end_time-start_time:.4f} seconds")
+    print(f"Total time taken {total_time:.4f} seconds")
 if __name__ == '__main__':
     main()
