@@ -1,0 +1,29 @@
+digraph "Sudoku Solver Flowchart" {
+	Start [label=Start fillcolor=lightgreen style=filled]
+	Init [label="Initialize Grid" fillcolor=lightblue style=filled]
+	FindCell [label="Find Empty Cell" fillcolor=lightgoldenrodyellow shape=diamond style=filled]
+	FoundEmpty [label="Found Empty" fillcolor=lightblue style=filled]
+	TryNums [label="Try Numbers 1-9" fillcolor=lightblue style=filled]
+	"Safe?" [label="Is Number Safe?" fillcolor=lightgoldenrodyellow shape=diamond style=filled]
+	TryNext [label="Try Next Number" fillcolor=lightblue style=filled]
+	PlaceNum [label="Place Number" fillcolor=lightblue style=filled]
+	Recurse [label="Recurse to Next Cell" fillcolor=lightblue style=filled]
+	"Sol?" [label="Solution Found?" fillcolor=lightgoldenrodyellow shape=diamond style=filled]
+	Reset [label="Reset Current Cell" fillcolor=lightblue style=filled]
+	Solved [label="Solution Found" fillcolor=lightgreen style=filled]
+	NoCells [label="No Empty Cells" fillcolor=gray style=filled]
+	Start -> Init
+	Init -> FindCell
+	FindCell -> FoundEmpty [label="Found Empty"]
+	FindCell -> NoCells [label="No Empty Cells"]
+	NoCells -> Solved
+	FoundEmpty -> TryNums
+	TryNums -> "Safe?"
+	"Safe?" -> TryNext [label=No]
+	"Safe?" -> PlaceNum [label=Yes]
+	PlaceNum -> Recurse
+	Recurse -> "Sol?"
+	"Sol?" -> Solved [label=Yes]
+	"Sol?" -> Reset [label=No]
+	Reset -> TryNums
+}
